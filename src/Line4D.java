@@ -1,6 +1,7 @@
 import canvasML.Line;
 
 import java.util.Objects;
+import java.util.Random;
 
 public class Line4D {
     private Point4D p1, p2;
@@ -50,5 +51,30 @@ public class Line4D {
 
     public double length() {
         return Math.sqrt(Math.pow((p1.getX() - p2.getX()), 2) + Math.pow((p1.getY() - p2.getY()), 2) + Math.pow((p1.getZ() - p2.getZ()), 2) + Math.pow((p1.getT() - p2.getT()), 2));
+    }
+
+    public static void main(String[] args) {
+        int n = 50;
+        Line4D[] lines = new Line4D[n];
+        Random r = new Random();
+        for(int i = 0; i < lines.length; i++) {
+            lines[i] = new Line4D(new Point4D(r.nextInt(), r.nextInt(), r.nextInt(), r.nextInt()), new Point4D(new Point4D(r.nextInt(), r.nextInt(), r.nextInt(), r.nextInt());
+        }
+
+        Line4D shortest, longest;
+        shortest = new Line4D(lines[0]);
+        longest = new Line4D(lines[0]);
+        for(int i = 1; i < lines.length; i++) {
+            if(lines[i].length() < shortest.length()) {
+                shortest = new Line4D(lines[i]);
+            }
+            if(lines[i].length() > longest.length()) {
+                longest = new Line4D(lines[i]);
+            }
+        }
+        System.out.println(shortest);
+        System.out.println(longest);
+
+
     }
 }
