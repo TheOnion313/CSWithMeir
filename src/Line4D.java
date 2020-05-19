@@ -1,5 +1,4 @@
-import canvasML.Line;
-
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Random;
 
@@ -30,7 +29,7 @@ public class Line4D {
         return "Line4D{" +
                 "p1=" + p1 +
                 ", p2=" + p2 +
-                '}';
+                "}\n";
     }
 
     public Point4D getP1() {
@@ -50,31 +49,56 @@ public class Line4D {
     }
 
     public double length() {
-        return Math.sqrt(Math.pow((p1.getX() - p2.getX()), 2) + Math.pow((p1.getY() - p2.getY()), 2) + Math.pow((p1.getZ() - p2.getZ()), 2) + Math.pow((p1.getT() - p2.getT()), 2));
+        return Math.sqrt(Math.pow((p1.getX() - p2.getX()), 2) + Math.pow((p1.getY() - p2.getY()), 2)
+                + Math.pow((p1.getZ() - p2.getZ()), 2) + Math.pow((p1.getT() - p2.getT()), 2));
     }
 
     public static void main(String[] args) {
         int n = 50;
         Line4D[] lines = new Line4D[n];
         Random r = new Random();
-        for(int i = 0; i < lines.length; i++) {
-            lines[i] = new Line4D(new Point4D(r.nextInt(), r.nextInt(), r.nextInt(), r.nextInt()), new Point4D(new Point4D(r.nextInt(), r.nextInt(), r.nextInt(), r.nextInt());
+        for (int i = 0; i < lines.length; i++) {
+            lines[i] = new Line4D(new Point4D(r.nextInt(), r.nextInt(), r.nextInt(), r.nextInt()),
+                    new Point4D(new Point4D(r.nextInt(), r.nextInt(), r.nextInt(), r.nextInt())));
         }
 
         Line4D shortest, longest;
         shortest = new Line4D(lines[0]);
         longest = new Line4D(lines[0]);
-        for(int i = 1; i < lines.length; i++) {
-            if(lines[i].length() < shortest.length()) {
+        for (int i = 1; i < lines.length; i++) {
+            if (lines[i].length() < shortest.length()) {
                 shortest = new Line4D(lines[i]);
             }
-            if(lines[i].length() > longest.length()) {
+            if (lines[i].length() > longest.length()) {
                 longest = new Line4D(lines[i]);
             }
         }
         System.out.println(shortest);
         System.out.println(longest);
 
+        Line4D[] sorted = insertionSort(lines);
+        System.out.println(Arrays.toString(sorted));
 
+    }
+
+    public static Line4D[] swap(Line4D[] arr, int id1, int id2) {
+        Line4D tmp = arr[id1];
+        arr[id1] = arr[id2];
+        arr[id2] = tmp;
+        return arr;
+    }
+
+    public static Line4D[] insertionSort(Line4D[] arr) {
+        int minidx;
+        for (int i = 0; i < arr.length; i++) {
+            minidx = i;
+            for (int j = i; j < arr.length; j++) {
+                if (arr[j].length() < arr[minidx].length()) {
+                    minidx = j;
+                }
+            }
+            swap(arr, minidx, i);
+        }
+        return arr;
     }
 }

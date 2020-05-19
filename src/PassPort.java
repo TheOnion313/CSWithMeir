@@ -1,3 +1,7 @@
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
+
 public class PassPort {
     private String name, lastName, number, id;
     private Date issueDate, expDate, birth;
@@ -97,12 +101,78 @@ public class PassPort {
     }
 
     public static void main(String[] args) {
-        PassPort p = new PassPort("a", "b", "c", "d", new Date(1, 2, 3), new Date(2, 3, 4), new Date(3, 4, 5));
-        PassPort p1 = new PassPort("a", "b", "c", "d", new Date(1, 2, 3), new Date(13, 15, 78), new Date(3, 4, 5));
-        PassPort p2 = new PassPort("a", "b", "c", "d", new Date(1, 2, 3), new Date(14, 15, 78), new Date(3, 4, 5));
+        main1(args);
+        PassPort p = new PassPort("a", "b", "c", "d", new Date(1, 2, 3),
+                new Date(2, 3, 4), new Date(3, 4, 5));
+        PassPort p1 = new PassPort("a", "b", "c", "d", new Date(1, 2, 3),
+                new Date(13, 15, 78), new Date(3, 4, 5));
+        PassPort p2 = new PassPort("a", "b", "c", "d", new Date(1, 2, 3),
+                new Date(14, 15, 78), new Date(3, 4, 5));
         Date today = new Date(13, 15, 78);
         System.out.println(willBeExpired(p, today));
         System.out.println(willBeExpired(p1, today));
         System.out.println(willBeExpired(p2, today));
+    }
+
+    public static void main1(String[] args) {
+        Scanner s = new Scanner(System.in);
+        int n = -1;
+        while (n <= 0) {
+            System.out.println("Put positive number");
+            n = s.nextInt();
+        }
+        Random r = new Random();
+        PassPort[] ps = new PassPort[n];
+        String[] names = new String[]{"Cohen", "Mizrahi", "Abu", "Ali", "Licht", "Or", "Nevo", "Nisgav", "Atias"};
+        Date[] dates = new Date[]{new Date(r.nextInt(), r.nextInt(), r.nextInt()), new Date(r.nextInt(), r.nextInt(),
+                r.nextInt()), new Date(r.nextInt(), r.nextInt(), r.nextInt()), new Date(r.nextInt(), r.nextInt(), r.nextInt()),
+                new Date(r.nextInt(), r.nextInt(), r.nextInt()), new Date(r.nextInt(), r.nextInt(), r.nextInt()), new Date(r.nextInt(),
+                r.nextInt(), r.nextInt()), new Date(r.nextInt(), r.nextInt(), r.nextInt()), new Date(r.nextInt(), r.nextInt(),
+                r.nextInt()), new Date(r.nextInt(), r.nextInt(), r.nextInt()), new Date(r.nextInt(), r.nextInt(), r.nextInt()),
+                new Date(r.nextInt(), r.nextInt(), r.nextInt()), new Date(r.nextInt(), r.nextInt(), r.nextInt()), new Date(r.nextInt(),
+                r.nextInt(), r.nextInt()), new Date(r.nextInt(), r.nextInt(), r.nextInt()), new Date(r.nextInt(), r.nextInt(), r.nextInt()),
+                new Date(r.nextInt(), r.nextInt(), r.nextInt()), new Date(r.nextInt(), r.nextInt(), r.nextInt())};
+        for (int i = 0; i < ps.length; i++) {
+            ps[i] = new PassPort(names[r.nextInt(names.length)], names[r.nextInt(names.length)], names[r.nextInt(names.length)],
+                    names[r.nextInt(names.length)], dates[r.nextInt(dates.length)], dates[r.nextInt(dates.length)],
+                    dates[r.nextInt(dates.length)]);
+        }
+        PassPort[] sorted = insertionSort(ps);
+        System.out.println(Arrays.toString(sorted));
+        System.out.println("\n\n");
+
+        for (int i = 0; i < ps.length; i++) {
+            String currentLast = ps[i].getLastName();
+            for (int j = i + 1; j < ps.length; j++) {
+                if (ps[j].getLastName().equals(ps[i].getLastName())) {
+                    swap(ps, j, i + 1);
+                    i++;D
+                }
+            }
+            i++;
+        }
+        System.out.println(Arrays.toString(ps));
+
+
+    }
+
+    public static void swap(PassPort[] arr, int id1, int id2) {
+        PassPort tmp = arr[id1];
+        arr[id1] = arr[id2];
+        arr[id2] = tmp;
+    }
+
+    public static PassPort[] insertionSort(PassPort[] arr) {
+        int minidx;
+        for (int i = 0; i < arr.length; i++) {
+            minidx = i;
+            for (int j = i; j < arr.length; j++) {
+                if (arr[j].getBirth().isAfter(arr[minidx].getBirth())) {
+                    minidx = j;
+                }
+            }
+            swap(arr, minidx, i);
+        }
+        return arr;
     }
 }
