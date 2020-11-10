@@ -7,6 +7,11 @@ public class Queue<T> {
     public Queue() {
     }
 
+    public Queue(Queue<T> q) {
+        this.first = new Node<>(q.first.getValue(), q.first.getNext());
+        this.last = new Node<>(q.last.getValue(), q.last.getNext());
+    }
+
     public boolean isEmpty() {
         return this.first == null;
     }
