@@ -1,3 +1,4 @@
+import DS.Node;
 
 public class Class32 {
 
@@ -5,9 +6,9 @@ public class Class32 {
         assert p != null;
 
         if (p.hasNext()) {
-            return p.getVal().toString() + " -> " + strLst(p.getNext());
+            return p.getValue().toString() + " -> " + strLst(p.getNext());
         }
-        return p.getVal().toString();
+        return p.getValue().toString();
     }
 
     public static <T> int lstSize(Node<T> p) {
@@ -33,7 +34,7 @@ public class Class32 {
     }
 
     public static Node<Integer> getIt(Node<Integer> lst, int val) {
-        if(lst.getVal() == val) return lst;
+        if(lst.getValue() == val) return lst;
         if(!lst.hasNext()) return null;
         return getIt(lst.getNext(), val);
     }
@@ -50,7 +51,7 @@ public class Class32 {
 
     public static <T> boolean inLst(Node<T> lst, T val) {
         if (lst == null) return false;
-        return lst.getVal() == val || inLst(lst.getNext(), val);
+        return lst.getValue() == val || inLst(lst.getNext(), val);
     }
 
     public static void main(String[] args) {
