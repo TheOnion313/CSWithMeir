@@ -1,10 +1,4 @@
 public class Item {
-    public String toString() {
-        return "Item{" +
-                "year=" + year +
-                ", score=" + score +
-                '}';
-    }
 
     private int year, score;
 
@@ -26,6 +20,11 @@ public class Item {
         return score;
     }
 
-
+    public String toString() {
+        return "Item{" +
+                "year=" + year +
+                ", score=" + score +
+                '}';
+    }
 
 }
