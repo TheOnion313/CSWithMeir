@@ -15,7 +15,7 @@ public class MrtnRace {
 
     public void addRunner(Runner r) {
         if (IstRunners == null) {
-            IstRunners = new Node<>(r);
+            IstRunners = new Node<>(new Runner(r));
         } else {
             Node<Runner> cur = IstRunners;
             while (cur.hasNext()) {
@@ -30,7 +30,9 @@ public class MrtnRace {
         while (!cur.getValue().getId().equals(id) && cur.hasNext()) {
             cur = cur.getNext();
         }
-        cur.getValue().addMrtn(new Item(this.getYearMrtn(), score));
+	if(cur.getValue().getId().equals(id)) {
+        	cur.getValue().addMrtn(new Item(this.getYearMrtn(), score));
+	}
     }
 
     public String getCountry() {
@@ -46,27 +48,18 @@ public class MrtnRace {
     }
 
 
-    public static Node<Runner> consistentRunners(MrtnRace m) {
+    public static int consistentRunners(MrtnRace m) {
         Node<Runner> cur = m.getIstRunners();
-        Node<Runner> ret = null;
-        Node<Runner> c = ret;
+	int count = 0;
 
         while (cur != null) {
             if (cur.getValue().ran3InARow()) {
-                if (ret == null) {
-                    Runner value = cur.getValue();
-                    ret = new Node<>(new Runner(value.getId(), value.getYearB(), value.getIstRunners()));
-                    c = ret;
-                } else {
-                    Runner value = cur.getValue();
-                    c.setNext(new Node<>(new Runner(value.getId(), value.getYearB(), value.getIstRunners())));
-                    c = c.getNext();
-                }
+                count++;
             }
             cur = cur.getNext();
         }
 
-        return ret;
+        return count;
     }
 
     @Override
