@@ -35,6 +35,6 @@ public class Node<T> {
     }
 
     public String toString() {
-        return this.next != null ? this.value + "-->" : this.value + "-->";
+        return this.next != null ? this.value + "-->" + this.next.toString() : this.value + "";
     }
 }
