@@ -13,12 +13,12 @@ public class QueueUtils {
     }
 
     public static <T> String stringify(Queue<T> q) {
-        String ret = q.q() + "";
+        String ret = q.head() + "";
         q.insert(q.remove());
 
         q.insert(null);
-        while (q.q() != null) {
-            ret += "--> " + q.q();
+        while (q.head() != null) {
+            ret += "--> " + q.head();
             q.insert(q.remove());
         }
         q.remove();
@@ -31,8 +31,8 @@ public class QueueUtils {
 
         q.insert(null);
 
-        while (q.q() != null) {
-            copy.insert(q.q());
+        while (q.head() != null) {
+            copy.insert(q.head());
             q.insert(q.remove());
         }
         q.remove();
