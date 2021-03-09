@@ -62,10 +62,18 @@ public class BinNodeUtils {
     }
 
     public static <T> boolean isNodeExist(BinNode<T> tree, BinNode<T> intersection) {
-        if(tree == null) return false;
-        if(intersection == tree) return true;
+        if (tree == null) return false;
+        if (intersection == tree) return true;
         return isNodeExist(tree.getLeft(), intersection) || isNodeExist(tree.getRight(), intersection);
     }
 
+    public static BinNode<Integer> findNodeByVal(BinNode<Integer> tree, int value) {
+        if (tree == null) return null;
+        if (tree.getValue() == value) return tree;
+        BinNode<Integer> left = findNodeByVal(tree.getLeft(), value);
+        if (left != null) return left;
+
+        return findNodeByVal(tree.getRight(), value);
+    }
 
 }
