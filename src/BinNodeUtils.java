@@ -81,8 +81,20 @@ public class BinNodeUtils {
             if (tree.getLeft() == null) return true;
             return twoOrZeroSon(tree.getRight()) && twoOrZeroSon(tree.getLeft());
         }
-        
+
         return false;
+    }
+
+    public static String valsAtLevel(BinNode<Integer> t, int level) {
+        assert level >= 0;
+        if (level == 0) return "" + t;
+        else return valsAtLevel(t.getLeft(), level - 1) + ", " + valsAtLevel(t.getRight(), level - 1);
+    }
+
+    public static boolean contains(BinNode<Integer> t1, BinNode<Integer> t2) {
+        if(t2 == null) return true;
+        if(findNodeByVal(t1, t2.getValue()) == null) return false;
+        return contains(t1, t2.getLeft()) && contains(t1, t2.getRight());
     }
 
 }
