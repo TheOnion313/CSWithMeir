@@ -97,4 +97,8 @@ public class BinNodeUtils {
         return contains(t1, t2.getLeft()) && contains(t1, t2.getRight());
     }
 
+    public static boolean equalsByVal(BinNode<Integer> t1, BinNode<Integer> t2) {
+        return contains(t1, t2) && contains(t2, t1);
+    }
+
 }
