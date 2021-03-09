@@ -60,4 +60,12 @@ public class BinNodeUtils {
         String s = tree2StrSub(tree);
         return s.substring(0, s.length() - 2);
     }
+
+    public static <T> boolean isNodeExist(BinNode<T> tree, BinNode<T> intersection) {
+        if(tree == null) return false;
+        if(intersection == tree) return true;
+        return isNodeExist(tree.getLeft(), intersection) || isNodeExist(tree.getRight(), intersection);
+    }
+
+
 }
