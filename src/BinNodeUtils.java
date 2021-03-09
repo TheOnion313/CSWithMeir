@@ -76,4 +76,13 @@ public class BinNodeUtils {
         return findNodeByVal(tree.getRight(), value);
     }
 
+    public static <T> boolean twoOrZeroSon(BinNode<T> tree) {
+        if ((tree.getLeft() == null) == (tree.getRight() == null)) {
+            if (tree.getLeft() == null) return true;
+            return twoOrZeroSon(tree.getRight()) && twoOrZeroSon(tree.getLeft());
+        }
+        
+        return false;
+    }
+
 }
