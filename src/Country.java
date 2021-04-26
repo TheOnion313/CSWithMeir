@@ -1,15 +1,15 @@
-//א1
+//ב1
 public class Country {
     private String countryName;
     private Game[] games;
-//א1
+//ב1
 
-    //א2
+    //ב2
     public Country(String countryName) {
         this.countryName = countryName;
         this.games = new Game[43];
     }
-//א2
+//ב2
 
     public String getCountryName() {
         return countryName;
@@ -27,17 +27,15 @@ public class Country {
         this.games = games;
     }
 
-    //א3
+    //ב3
     public boolean participates(Game g) {
-        for(Game game : this.games) {
-            if(g == game) {
+        for (Game game : this.games) {
+            if (g == game) {
                 return true;
             }
         }
 
         return false;
     }
-    //א3
-    
-
+    //ב3
 }

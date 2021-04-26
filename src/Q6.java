@@ -15,13 +15,13 @@ public class Q6 {
          * The function iterates recursively over all nodes of the tree and checks
          * Therefore: O(m)
          */
-        if(!(t.hasLeft() || t.hasRight())) return false;
+        if (!(t.hasLeft() || t.hasRight())) return false;
         boolean l = false, r = false;
 
-        if(t.hasLeft()) {
+        if (t.hasLeft()) {
             l = exist(t.getLeft(), x);
         }
-        if(t.hasRight()) {
+        if (t.hasRight()) {
             r = exist(t.getRight(), x);
         }
 
@@ -40,9 +40,9 @@ public class Q6 {
          * The function goes over all nodes once, for each one it calls exist once
          * Therefore: O(n*m) ג
          */
-        if(t1 == null) return first;
-        if(!exist(t2, t1.getValue())) {
-            if(!first.hasNext()) {
+        if (t1 == null) return first;
+        if (!exist(t2, t1.getValue())) {
+            if (!first.hasNext()) {
                 first.setNext(new Node<Integer>(t1.getValue()));
             } else {
                 Node<Integer> tmp = first.getNext();
